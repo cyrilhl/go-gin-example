@@ -8,6 +8,7 @@ import (
 
 	"github.com/EDDYCJY/go-gin-example/pkg/app"
 	"github.com/EDDYCJY/go-gin-example/pkg/e"
+	"github.com/EDDYCJY/go-gin-example/pkg/logging"
 	"github.com/EDDYCJY/go-gin-example/pkg/util"
 	"github.com/EDDYCJY/go-gin-example/service/auth_service"
 )
@@ -33,6 +34,7 @@ func GetAuth(c *gin.Context) {
 
 	a := auth{Username: username, Password: password}
 	ok, _ := valid.Valid(&a)
+	logging.Debug("User", username, "login success")
 
 	if !ok {
 		app.MarkErrors(valid.Errors)

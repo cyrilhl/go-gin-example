@@ -2,6 +2,7 @@ package jwt
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -17,7 +18,9 @@ func JWT() gin.HandlerFunc {
 		var data interface{}
 
 		code = e.SUCCESS
-		token := c.Query("token")
+		token := c.GetHeader("Authorization")
+		token = strings.TrimPrefix(token, "Bearer ")
+
 		if token == "" {
 			code = e.INVALID_PARAMS
 		} else {
