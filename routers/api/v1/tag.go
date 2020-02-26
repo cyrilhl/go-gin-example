@@ -3,17 +3,17 @@ package v1
 import (
 	"net/http"
 
-	"github.com/unknwon/com"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
+	"github.com/unknwon/com"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/app"
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/pkg/export"
-	"github.com/EDDYCJY/go-gin-example/pkg/logging"
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
-	"github.com/EDDYCJY/go-gin-example/service/tag_service"
+	"github.com/cyrilhl/go-gin-example/pkg/app"
+	"github.com/cyrilhl/go-gin-example/pkg/e"
+	"github.com/cyrilhl/go-gin-example/pkg/export"
+	"github.com/cyrilhl/go-gin-example/pkg/logging"
+	"github.com/cyrilhl/go-gin-example/pkg/setting"
+	"github.com/cyrilhl/go-gin-example/pkg/util"
+	"github.com/cyrilhl/go-gin-example/service/tag_service"
 )
 
 // @Summary Get multiple article tags
@@ -231,7 +231,7 @@ func ExportTag(c *gin.Context) {
 
 // @Summary Import article tag
 // @Produce  json
-// @Param file body file true "Excel File"
+// @Param file formData file true "Excel File"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /api/v1/tags/import [post]

@@ -5,13 +5,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/app"
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/pkg/logging"
-	"github.com/EDDYCJY/go-gin-example/pkg/upload"
+	"github.com/cyrilhl/go-gin-example/pkg/app"
+	"github.com/cyrilhl/go-gin-example/pkg/e"
+	"github.com/cyrilhl/go-gin-example/pkg/logging"
+	"github.com/cyrilhl/go-gin-example/pkg/upload"
 )
 
-// @Summary Import Image
+// @Summary UploadImage
 // @Produce  json
 // @Param image formData file true "Image File"
 // @Success 200 {object} app.Response

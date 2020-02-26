@@ -6,11 +6,11 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/app"
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/pkg/logging"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
-	"github.com/EDDYCJY/go-gin-example/service/auth_service"
+	"github.com/cyrilhl/go-gin-example/pkg/app"
+	"github.com/cyrilhl/go-gin-example/pkg/e"
+	"github.com/cyrilhl/go-gin-example/pkg/logging"
+	"github.com/cyrilhl/go-gin-example/pkg/util"
+	"github.com/cyrilhl/go-gin-example/service/auth_service"
 )
 
 type auth struct {
@@ -18,19 +18,23 @@ type auth struct {
 	Password string `valid:"Required; MaxSize(50)"`
 }
 
-// @Summary Get Auth
+// @Summary GetAuth
 // @Produce  json
 // @Param username query string true "userName"
 // @Param password query string true "password"
 // @Success 200 {object} app.Response
 // @Failure 500 {object} app.Response
-// @Router /auth [get]
+// @Router /auth [post]
 func GetAuth(c *gin.Context) {
 	appG := app.Gin{C: c}
 	valid := validation.Validation{}
 
-	username := c.Query("username")
-	password := c.Query("password")
+	/*
+		username := c.Query("username")
+		password := c.Query("password")
+	*/
+	username := c.PostForm("username")
+	password := c.PostForm("password")
 
 	a := auth{Username: username, Password: password}
 	ok, _ := valid.Valid(&a)

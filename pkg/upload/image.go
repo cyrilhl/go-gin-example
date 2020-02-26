@@ -8,10 +8,10 @@ import (
 	"path"
 	"strings"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/file"
-	"github.com/EDDYCJY/go-gin-example/pkg/logging"
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
+	"github.com/cyrilhl/go-gin-example/pkg/file"
+	"github.com/cyrilhl/go-gin-example/pkg/logging"
+	"github.com/cyrilhl/go-gin-example/pkg/setting"
+	"github.com/cyrilhl/go-gin-example/pkg/util"
 )
 
 // GetImageFullUrl get the full access path

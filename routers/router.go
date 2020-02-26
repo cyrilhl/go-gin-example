@@ -5,16 +5,16 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	_ "github.com/EDDYCJY/go-gin-example/docs"
-	"github.com/swaggo/gin-swagger"
+	_ "github.com/cyrilhl/go-gin-example/docs"
+	"github.com/cyrilhl/go-gin-example/middleware/jwt"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 
-	"github.com/EDDYCJY/go-gin-example/middleware/jwt"
-	"github.com/EDDYCJY/go-gin-example/pkg/export"
-	"github.com/EDDYCJY/go-gin-example/pkg/qrcode"
-	"github.com/EDDYCJY/go-gin-example/pkg/upload"
-	"github.com/EDDYCJY/go-gin-example/routers/api"
-	"github.com/EDDYCJY/go-gin-example/routers/api/v1"
+	"github.com/cyrilhl/go-gin-example/pkg/export"
+	"github.com/cyrilhl/go-gin-example/pkg/setting"
+	"github.com/cyrilhl/go-gin-example/pkg/upload"
+	"github.com/cyrilhl/go-gin-example/routers/api"
+	v1 "github.com/cyrilhl/go-gin-example/routers/api/v1"
 )
 
 // InitRouter initialize routing information
@@ -23,11 +23,15 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
+	r.GET("/", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "site/")
+	})
+	r.StaticFS("/site", http.Dir(setting.AppSetting.StaticFilePath))
+
 	r.StaticFS("/export", http.Dir(export.GetExcelFullPath()))
 	r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
-	r.StaticFS("/qrcode", http.Dir(qrcode.GetQrCodeFullPath()))
 
-	r.GET("/auth", api.GetAuth)
+	r.POST("/api/auth", api.GetAuth)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.POST("/upload", api.UploadImage)
 
@@ -57,8 +61,6 @@ func InitRouter() *gin.Engine {
 		apiv1.PUT("/articles/:id", v1.EditArticle)
 		//删除指定文章
 		apiv1.DELETE("/articles/:id", v1.DeleteArticle)
-		//生成文章海报
-		apiv1.POST("/articles/poster/generate", v1.GenerateArticlePoster)
 	}
 
 	return r
